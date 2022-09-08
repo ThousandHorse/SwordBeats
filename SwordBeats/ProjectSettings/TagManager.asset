@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - CollisionDetector
+  - EnemyLife
+  - PlayerLife
+  - BattleModeDetector
+  - UIController
   layers:
   - Default
   - TransparentFX

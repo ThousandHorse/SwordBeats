@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
 public class EnemyStatus : MobStatus
 {
     NavMeshAgent agent;
+    GameObject uIController;
+
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
+        uIController = GameObject.FindGameObjectWithTag("UIController");
     }
 
     private void Update()
     {
+        //Debug.Log("EnemySpeed: " + agent.velocity.magnitude);
         _animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
     }
 
@@ -23,11 +28,24 @@ public class EnemyStatus : MobStatus
     {
         base.OnDeath();
         StartCoroutine(DestoryCoroutine());
+        
+
     }
 
     private IEnumerator DestoryCoroutine()
     {
         yield return new WaitForSeconds(3);
         Destroy(gameObject);
+        uIController.GetComponent<UIController>().IndicateClearText();
+        StartCoroutine(MainSceneCoroutine());
+
+    }
+
+    private IEnumerator MainSceneCoroutine()
+    {
+        Debug.Log("MainSceneCoroutine");
+        yield return new WaitForSeconds(3);
+        // ÉÅÉCÉìÉVÅ[ÉìÇ…ñﬂÇÈ
+        GetComponent<SceneController>().changeMainScene();
     }
 }
