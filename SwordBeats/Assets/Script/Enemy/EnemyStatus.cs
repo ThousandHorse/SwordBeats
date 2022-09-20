@@ -28,14 +28,13 @@ public class EnemyStatus : MobStatus
     {
         base.OnDeath();
         StartCoroutine(DestoryCoroutine());
-        
-
     }
 
     private IEnumerator DestoryCoroutine()
     {
         yield return new WaitForSeconds(3);
-        Destroy(gameObject);
+        Debug.Log("Wait");
+        //Destroy(gameObject);
         uIController.GetComponent<UIController>().IndicateClearText();
         StartCoroutine(MainSceneCoroutine());
 
@@ -43,9 +42,10 @@ public class EnemyStatus : MobStatus
 
     private IEnumerator MainSceneCoroutine()
     {
-        Debug.Log("MainSceneCoroutine");
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         // ÉÅÉCÉìÉVÅ[ÉìÇ…ñﬂÇÈ
         GetComponent<SceneController>().changeMainScene();
+        Destroy(gameObject);
+        Debug.Log("Destoried");
     }
 }

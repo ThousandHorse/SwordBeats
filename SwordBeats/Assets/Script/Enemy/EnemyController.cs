@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
 
     Rigidbody _rigidbody;
 
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -79,6 +78,15 @@ public class EnemyController : MonoBehaviour
             //animator.SetBool("IsMove", false);
             //agent.destination = defaultPos;
         }
+    }
+
+    public void BackFirstPostition(Collider collider)
+    {
+        // Å‰‚ÌˆÊ’u‚ÉŒü‚©‚Á‚Ä“®‚­
+        agent.isStopped = false;
+        agent.destination = defaultPos;
+
+
     }
 
     

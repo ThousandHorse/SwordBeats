@@ -22,12 +22,12 @@ public class SceneController : MonoBehaviour
     public void changeBattleScene(Collider collider)
     {
 
-        Debug.Log(collider);
+        Debug.Log("changeBattleScene");
         this.sceneName = SceneManager.GetActiveScene().name;
         Debug.Log(this.sceneName);
 
         // í“¬ˆÈŠO‚ÌƒV[ƒ“‚Ìê‡
-        if (this.sceneName != BATTLE_SCENE && collider.CompareTag("BattleModeDetector"))
+        if (this.sceneName != BATTLE_SCENE && collider.CompareTag("Player"))
         {
             SceneManager.LoadScene(BATTLE_SCENE);
         }

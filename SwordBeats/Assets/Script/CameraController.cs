@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    const string BATTLE_SCENE = "BattleScene";
+    const string MAIN_SCENE = "MainScene";
 
     Vector3 targetPos;
     GameObject player;
@@ -12,6 +15,7 @@ public class CameraController : MonoBehaviour
     CinemachineBrain _cinemachineBrain;
     const float ROTATE_SPEED = 2.0f;
     bool isBattle = false;
+
 
     // プレイヤーとカメラの距離
     Vector3 offset;
@@ -30,16 +34,15 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        // BattleModeの場合(敵と衝突した場合)
-        if (isBattle)
+        // 敵と衝突し、戦闘になった場合
+        if (SceneManager.GetActiveScene().name == BATTLE_SCENE)
         {
-            // カメラを固定させる
+            // カメラを戦闘モード用に固定させる
             
 
         }
         else
         {
-            // MainModeの場合
             // プレイヤーの動きに合わせて追尾させる
             mainCamera.transform.position = player.transform.position + offset;
             rotateCamera();
