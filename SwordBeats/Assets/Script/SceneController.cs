@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     string sceneName;
-    const string BATTLE_SCENE = "BattleScene";
+    const string BEAR_BATTLE_SCENE = "BearBattleScene";
+    const string SLIME_BATTLE_SCENE = "SlimeBattleScene";
+    const string TURTLESHELL_BATTLE_SCENE = "TurtleShellBattleScene";
+    const string BOSS_BATTLE_SCENE = "BossBattleScene";
+
     const string MAIN_SCENE = "MainScene";
+
+    string enemyName;
 
 
     void Start()
@@ -27,9 +33,17 @@ public class SceneController : MonoBehaviour
         Debug.Log(this.sceneName);
 
         // 戦闘以外のシーンの場合
-        if (this.sceneName != BATTLE_SCENE && collider.CompareTag("Player"))
+        if (collider.CompareTag("Player"))
         {
-            SceneManager.LoadScene(BATTLE_SCENE);
+            if (gameObject.CompareTag("Bear"))
+                SceneManager.LoadScene(BEAR_BATTLE_SCENE);
+            if (gameObject.CompareTag("Slime"))
+                SceneManager.LoadScene(SLIME_BATTLE_SCENE);
+            if (gameObject.CompareTag("TurtleShell"))
+                SceneManager.LoadScene(TURTLESHELL_BATTLE_SCENE);
+            if (gameObject.CompareTag("Boss"))
+                SceneManager.LoadScene(BOSS_BATTLE_SCENE);
+
         }
 
 
@@ -37,5 +51,7 @@ public class SceneController : MonoBehaviour
     public void changeMainScene()
     {
         SceneManager.LoadScene(MAIN_SCENE);
+
+        // TODO: 倒した敵のオブジェクトを破棄する
     }
 }

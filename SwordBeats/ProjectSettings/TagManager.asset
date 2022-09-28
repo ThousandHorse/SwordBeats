@@ -10,6 +10,10 @@ TagManager:
   - PlayerLife
   - BattleModeDetector
   - UIController
+  - Bear
+  - Slime
+  - TurtleShell
+  - Boss
   layers:
   - Default
   - TransparentFX

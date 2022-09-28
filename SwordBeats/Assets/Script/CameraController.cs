@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
     GameObject mainCamera;
     CinemachineBrain _cinemachineBrain;
     const float ROTATE_SPEED = 2.0f;
-    bool isBattle = false;
+    //bool isBattle = false;
 
 
     // プレイヤーとカメラの距離
@@ -62,10 +62,10 @@ public class CameraController : MonoBehaviour
     /*
      * 戦闘始まる前に呼ばれる
      */
-    public void BattleMode()
-    {
-        isBattle = true;
-    }
+    //public void BattleMode()
+    //{
+    //    isBattle = true;
+    //}
 
     /*
      * 戦闘が終わった後に呼ばれる

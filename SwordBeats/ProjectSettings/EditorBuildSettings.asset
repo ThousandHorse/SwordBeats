@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: b16d8195520aa934f81622df4e391037
   - enabled: 1
-    path: Assets/Scenes/BattleScene.unity
+    path: Assets/Scenes/BearBattleScene.unity
     guid: 0f80da0919a2f634c87fd95faa9f9619
+  - enabled: 1
+    path: Assets/Scenes/SlimeBattleScene.unity
+    guid: df8d4bf587149c14ead3c3fa7f75a2b2
+  - enabled: 1
+    path: Assets/Scenes/TurtleShellBattleScene.unity
+    guid: e413c26ac00d8b7439dea5fd6490ba97
+  - enabled: 1
+    path: Assets/Scenes/BossBattleScene.unity
+    guid: dfa75921a5dfe9443913876c93dc4282
   m_configObjects: {}
