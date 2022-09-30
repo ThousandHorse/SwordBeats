@@ -15,10 +15,9 @@ public class SceneController : MonoBehaviour
 
     string enemyName;
 
-
     void Start()
     {
-
+        
     }
     void Update()
     {
@@ -32,7 +31,6 @@ public class SceneController : MonoBehaviour
         this.sceneName = SceneManager.GetActiveScene().name;
         Debug.Log(this.sceneName);
 
-        // í“¬ˆÈŠO‚ÌƒV[ƒ“‚Ìê‡
         if (collider.CompareTag("Player"))
         {
             if (gameObject.CompareTag("Bear"))

@@ -9,6 +9,7 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject[] PlayerLife;
     [SerializeField] GameObject[] EnemyLife;
     [SerializeField] TextMeshProUGUI BattleModeText;
+    
     void Start()
     {
     }
@@ -20,11 +21,22 @@ public class UIController : MonoBehaviour
 
     public void decreaseLife(int life)
     {
-        EnemyLife[life].GetComponent<Image>().color = Color.black;
+        if (gameObject.CompareTag("Player"))
+        {
+            PlayerLife[life].GetComponent<Image>().color = Color.black;
+        }
+        else
+        {
+            EnemyLife[life].GetComponent<Image>().color = Color.black;
+        }
+        
+        
     }
 
     public void IndicateClearText()
     {
         BattleModeText.text = "Clear!";
     }
+
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Vector3 _moveVelocity;
     private PlayerStatus _status;
     private MobAttack _attack;
+    string sceneName;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
         _attack = GetComponent<MobAttack>();
 
         animator = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -35,13 +38,25 @@ public class PlayerController : MonoBehaviour
         }
         if (_status.IsMovable)
         {
+            this.sceneName = SceneManager.GetActiveScene().name;
+
             // 移動方向と速度指定
-            _moveVelocity.x = Input.GetAxis("Horizontal") * moveSpeed;
-            _moveVelocity.z = Input.GetAxis("Vertical") * moveSpeed;
+            if (this.sceneName == "MainScene")
+            {
+                _moveVelocity.x = Input.GetAxis("Horizontal") * moveSpeed;
+                _moveVelocity.z = Input.GetAxis("Vertical") * moveSpeed;
+            }
+
+            if (this.sceneName.Contains("BattleScene"))
+            {
+                _moveVelocity.z = Input.GetAxis("Horizontal") * moveSpeed;
+            }
+
+                
 
             // 移動
             _transform.position += _moveVelocity;
-          
+
             // プレイヤーを移動方向に向くように変更する
             _transform.LookAt
                 (_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));

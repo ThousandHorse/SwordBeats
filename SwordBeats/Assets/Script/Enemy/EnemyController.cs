@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(EnemyStatus))]
@@ -19,14 +20,35 @@ public class EnemyController : MonoBehaviour
 
     Rigidbody _rigidbody;
 
+    float delta = 0;
+    float span = 3;
+    private MobAttack _attack;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         _status = GetComponent<EnemyStatus>();
         _rigidbody = GetComponent<Rigidbody>();
+        _attack = GetComponent<MobAttack>();
         _rigidbody.isKinematic = true;
         defaultPos = transform.position;
+    }
+
+    private void Update()
+    {
+        // 戦闘シーンの場合
+        if (SceneManager.GetActiveScene().name.Contains("BattleScene"))
+        {
+            this.delta += Time.deltaTime;
+            if (this.delta > this.span)
+            {
+                this.delta = 0;
+                Debug.Log("EnemyAttack");
+                _attack.AttackIfPossible();
+            }
+        }
+        
     }
 
     public void OnDetectObject(Collider collider)
@@ -35,25 +57,20 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("out of range");
             agent.isStopped = true;
-
             // 勝手に動かないようにする
             _rigidbody.isKinematic = true;
-
             return;
         }
 
         if (collider.CompareTag("Player"))
         {
             // プレイヤーに向かって動く
-            //agent.destination = collider.transform.position;
-
             var positionDiff = collider.transform.position - transform.position;
             var distance = positionDiff.magnitude;
             var direction = positionDiff.normalized;
 
             var hitCount = Physics.RaycastNonAlloc
                 (transform.position, direction, _raycastHit, distance, raycastLayerMask);
-            //Debug.Log("hitCount:" + hitCount);
 
             // プレイヤーとの間に障害物がない場合
             // TODO: 条件要修正
@@ -71,12 +88,6 @@ public class EnemyController : MonoBehaviour
                 agent.isStopped = true;
             }
 
-        }
-        else
-        {
-            // 待機アニメーションに切り替え
-            //animator.SetBool("IsMove", false);
-            //agent.destination = defaultPos;
         }
     }
 

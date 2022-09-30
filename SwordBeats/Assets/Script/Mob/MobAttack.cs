@@ -18,6 +18,7 @@ public class MobAttack : MonoBehaviour
 
     public void AttackIfPossible()
     {
+        Debug.Log("AttackIfPossible");
         Debug.Log(_status);
         if (!_status.IsAttackable) return;
         _status.GoToAttackStateIfPossible();
